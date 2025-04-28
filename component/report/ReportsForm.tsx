@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { LocationInput } from "./LocationInput";
-import crypto from "crypto";
+// import crypto from "crypto";
 
 const REPORT_TYPES = [
   "Theft",
@@ -76,15 +76,11 @@ export function ReportForm({ onComplete }: ReportFormProps) {
   };
 
   const generateReportId = useCallback(() => {
-    const timestamp = Date.now().toString();
-    const randomBytes = crypto.randomBytes(16).toString("hex");
-    const combinedString = `${timestamp}-${randomBytes}`;
-    return crypto
-      .createHash("sha256")
-      .update(combinedString)
-      .digest("hex")
-      .slice(0, 16);
+    const array = new Uint8Array(16);
+    window.crypto.getRandomValues(array);
+    return Array.from(array, (byte) => byte.toString(16).padStart(2, "0")).join("");
   }, []);
+  
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
