@@ -1,3 +1,4 @@
+"use client";
 import { ReportWizard } from "@/component/report/ReportsWizard";
 
 export default function SubmitReport() {

@@ -1,7 +1,14 @@
 // @ts-nocheck
 "use client";
+
 import { useState } from "react";
-import { AddressAutofill } from "@mapbox/search-js-react";
+import dynamic from "next/dynamic";
+
+// Dynamically import AddressAutofill with SSR disabled
+const AddressAutofill = dynamic(
+  () => import("@mapbox/search-js-react").then((mod) => mod.AddressAutofill),
+  { ssr: false }
+);
 
 interface LocationInputProps {
   value: string;
