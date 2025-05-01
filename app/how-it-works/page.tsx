@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function HowItWorks() {
   return (
@@ -243,6 +244,7 @@ export default function HowItWorks() {
             <h2 className="text-2xl font-bold text-white mb-6">
               Ready to Make a Report?
             </h2>
+            <Link href="/submit-report">
             <button className="group relative inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-sky-500 px-8 text-sm font-medium text-white transition-all hover:bg-sky-400">
               Start Anonymous Report
               <svg
@@ -259,6 +261,7 @@ export default function HowItWorks() {
                 />
               </svg>
             </button>
+            </Link>
           </div>
         </div>
       </main>
