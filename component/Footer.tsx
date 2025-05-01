@@ -30,7 +30,7 @@ export default function Footer() {
         </div>
   
         <div className="text-center mt-10">
-          <p className="text-sm text-neutral-400">© {new Date().getFullYear()} Your Company Name. All rights reserved.</p>
+          <p className="text-sm text-neutral-400">© {new Date().getFullYear()} Farhan Ahmad. All rights reserved.</p>
         </div>
       </footer>
     );

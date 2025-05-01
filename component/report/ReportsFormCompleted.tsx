@@ -35,16 +35,18 @@ export function ReportSubmitted({ data }: ReportSubmittedProps) {
         </p>
       </div>
 
-      <div className="bg-zinc-800/50 rounded-lg p-6 max-w-md mx-auto">
-        <h4 className="text-white font-medium mb-2">Your Report ID</h4>
-        <div className="bg-zinc-900 rounded p-3">
-          <code className="text-sky-400">{reportId}</code>
-        </div>
-        <p className="mt-2 text-sm text-zinc-400">
-          Save this ID to check your report status or communicate securely with
-          law enforcement
-        </p>
-      </div>
+      <div className="bg-neutral-800/60 rounded-lg p-6">
+  <h4 className="text-white font-medium mb-2">Your Report ID</h4>
+  <div className="bg-neutral-900 rounded p-3 overflow-x-auto max-w-full">
+    <code className="text-sky-400 text-sm break-all whitespace-break-spaces block">
+      {reportId}
+    </code>
+  </div>
+  <p className="mt-2 text-sm text-zinc-400">
+    Save this ID to check your report status or communicate securely with law enforcement.
+  </p>
+</div>
+
 
       <div className="pt-4">
         <button

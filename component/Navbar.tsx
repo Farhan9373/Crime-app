@@ -13,7 +13,7 @@ export default function Navbar() {
         <div className="mx-auto max-w-7xl px-6">
           <div className="flex h-16 items-center justify-between">
             {/* Logo and Brand */}
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-4 md:space-x-6">
               <Link href="/" className="flex items-center space-x-3">
                 <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-sky-400 to-blue-600 flex items-center justify-center">
                   <svg
@@ -30,9 +30,10 @@ export default function Navbar() {
                     />
                   </svg>
                 </div>
-                <span className="text-lg font-semibold text-white">
-                  SafeReport
-                </span>
+                <span className="text-sm font-semibold text-white md:text-lg">
+  ReportX
+</span>
+
               </Link>
             </div>
 
@@ -56,27 +57,28 @@ export default function Navbar() {
               >
                 How It Works
               </Link>
-              <Link
+              {/* <Link
                 href="/resources"
                 className="text-sm text-zinc-400 hover:text-white transition-colors"
               >
                 Resources
-              </Link>
+              </Link> */}
             </div>
 
             {/* Emergency Button */}
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-6 ml-6 ">
               <Link
                 href="/contact"
                 className="hidden md:block text-sm text-zinc-400 hover:text-white transition-colors"
               >
                 Contact
               </Link>
+              <Link href={"tel:911"}>
               <button className=" group flex h-9 items-center gap-2 rounded-full bg-red-500/10 pl-4 pr-5 text-sm font-medium text-red-500 ring-1 ring-inset ring-red-500/20 transition-all hover:bg-red-500/20">
                 <span className="h-1.5 w-1.5 rounded-full bg-red-900 animate-pulse" />
                 Emergency: 911
               </button>
-
+              </Link>
               {/* Mobile Menu Button */}
               <button
                 className="md:hidden p-2 text-zinc-400 hover:text-white"

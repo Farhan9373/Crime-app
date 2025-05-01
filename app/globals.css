@@ -71,4 +71,25 @@ body {
 html {
   scroll-behavior: smooth;
 }
+*, *::before, *::after {
+  animation: slideFadeIn 0.6s ease-out forwards;
+}
 
+@keyframes slideFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(var(--slide-distance));
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Alternate direction for even/odd elements */
+*:nth-child(odd) {
+  --slide-distance: -40px; /* from left */
+}
+*:nth-child(even) {
+  --slide-distance: 40px; /* from right */
+}

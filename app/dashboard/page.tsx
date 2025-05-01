@@ -95,7 +95,7 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white overflow-hidden ">
       <nav className="border-b border-neutral-800 bg-black/50 backdrop-blur-xl sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
@@ -155,80 +155,95 @@ export default function Dashboard() {
         </div>
 
         <div className="grid gap-4">
-          {filteredReports.map((report) => (
-            <div
-              key={report.id}
-              className="bg-neutral-900/50 backdrop-blur-sm rounded-xl p-6 border border-neutral-800 hover:border-neutral-700 transition-all"
-            >
-              <div className="flex justify-between items-start gap-6">
-                <div className="space-y-4 flex-1">
-                  <div className="flex items-center gap-3">
-                    <h2 className="text-lg font-medium text-neutral-200">
-                      {report.title}
-                    </h2>
-                    <span
-                      className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(
-                        report.status
-                      )}`}
-                    >
-                      {report.status}
-                    </span>
-                  </div>
-                  <p className="text-neutral-400 text-sm">{report.description}</p>
-                  <div className="flex flex-wrap gap-6 text-sm text-neutral-500">
-                    <span className="flex items-center gap-2">
-                      <div className="w-4 h-4 rounded-full bg-neutral-800 flex items-center justify-center">
-                        <div className="w-2 h-2 rounded-full bg-neutral-600"></div>
-                      </div>
-                      {report.type}
-                    </span>
-                    <span className="flex items-center gap-2">
-                      <div className="w-4 h-4 rounded-full bg-neutral-800 flex items-center justify-center">
-                        <div className="w-2 h-2 rounded-full bg-neutral-600"></div>
-                      </div>
-                      {report.location || "N/A"}
-                    </span>
-                    <span className="flex items-center gap-2">
-                      <div className="w-4 h-4 rounded-full bg-neutral-800 flex items-center justify-center">
-                        <div className="w-2 h-2 rounded-full bg-neutral-600"></div>
-                      </div>
-                      {new Date(report.createdAt).toLocaleDateString()}
-                    </span>
-                  </div>
-                  {report.image && (
-                    <img
-                      src={report.image}
-                      alt="Report"
-                      className="mt-4 rounded-lg border border-neutral-800"
-                    />
-                  )}
-                </div>
-                <select
-                  value={report.status}
-                  onChange={(e) =>
-                    updateReportStatus(
-                      report.id,
-                      e.target.value as ReportStatus
-                    )
-                  }
-                  className="bg-neutral-900 border border-neutral-800 text-neutral-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/20"
-                >
-                  {Object.values(ReportStatus).map((status) => (
-                    <option key={status} value={status}>
-                      {status}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
+  {filteredReports.map((report) => (
+    <div
+      key={report.id}
+      className="relative bg-neutral-900/50 backdrop-blur-sm rounded-xl p-6 border border-neutral-800 hover:border-neutral-700 transition-all"
+    >
+      {/* Dropdown for large screens: top-right */}
+      <div className="hidden md:block absolute top-6 right-6">
+        <select
+          value={report.status}
+          onChange={(e) =>
+            updateReportStatus(report.id, e.target.value as ReportStatus)
+          }
+          className="bg-neutral-900 border border-neutral-800 text-neutral-300 rounded-lg px-4 py-2"
+        >
+          {Object.values(ReportStatus).map((status) => (
+            <option key={status} value={status}>
+              {status}
+            </option>
           ))}
+        </select>
+      </div>
 
-          {filteredReports.length === 0 && (
-            <div className="text-center py-12 text-neutral-500 bg-neutral-900/50 rounded-xl border border-neutral-800">
-              No reports found matching the selected filters.
-            </div>
+      <div className="flex flex-col gap-6">
+        <div className="space-y-4">
+          <div className="flex items-center gap-3 flex-wrap">
+            <h2 className="text-lg font-medium text-neutral-200">{report.title}</h2>
+            <span
+              className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(
+                report.status
+              )}`}
+            >
+              {report.status}
+            </span>
+          </div>
+
+          <p className="text-neutral-400 text-sm">{report.description}</p>
+
+          <div className="flex flex-wrap gap-6 text-sm text-neutral-500">
+            <span className="flex items-center gap-2">
+              <div className="w-4 h-4 rounded-full bg-neutral-800 flex items-center justify-center">
+                <div className="w-2 h-2 rounded-full bg-neutral-600"></div>
+              </div>
+              {report.type}
+            </span>
+            <span className="flex items-center gap-2">
+              <div className="w-4 h-4 rounded-full bg-neutral-800 flex items-center justify-center">
+                <div className="w-2 h-2 rounded-full bg-neutral-600"></div>
+              </div>
+              {report.location || "N/A"}
+            </span>
+            <span className="flex items-center gap-2">
+              <div className="w-4 h-4 rounded-full bg-neutral-800 flex items-center justify-center">
+                <div className="w-2 h-2 rounded-full bg-neutral-600"></div>
+              </div>
+              {new Date(report.createdAt).toLocaleDateString()}
+            </span>
+          </div>
+
+          {report.image && (
+            <img
+              src={report.image}
+              alt="Report"
+              className="mt-4 rounded-lg border border-neutral-800 max-w-full"
+            />
           )}
         </div>
+
+        {/* Dropdown for small screens: stacked */}
+        <div className="block md:hidden">
+          <select
+            value={report.status}
+            onChange={(e) =>
+              updateReportStatus(report.id, e.target.value as ReportStatus)
+            }
+            className="bg-neutral-900 border border-neutral-800 text-neutral-300 rounded-lg px-4 py-2 w-full"
+          >
+            {Object.values(ReportStatus).map((status) => (
+              <option key={status} value={status}>
+                {status}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
+
       </main>
     </div>
   );
