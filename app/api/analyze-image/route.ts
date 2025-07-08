@@ -7,8 +7,9 @@ export async function POST(request: Request) {
   try {
     const { image } = await request.json();
     const base64Data = image.split(",")[1];
+    //model change
+    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
 
     const prompt = `Analyze this emergency situation image and respond in this exact format without any asterisks or bullet points:
 TITLE: Write a clear, brief title
